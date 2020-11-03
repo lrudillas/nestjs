@@ -1,20 +1,14 @@
 import { Module } from '@nestjs/common';
-import { SequelizeModule } from '@nestjs/sequelize';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
+import { ConfigModule } from '@nestjs/config';
+import configuration from './config/configuration';
 
-@Module({
-  	imports: [
-    	SequelizeModule.forRoot({
-      		dialect: 'mysql',
-      		host: 'localhost',
-      		port: 3306,
-      		username: 'root',
-      		password: 'root',
-      		database: 'test',
-          autoLoadModels: true,
-          synchronize: true
-    	}),
-      UsersModule
-  	]
-})
+imports: [
+    ConfigModule.forRoot({
+      load: [configuration]
+    }),
+    UsersModule
+  ]
+
 export class AppModule {}

@@ -1,13 +1,16 @@
-import { Column, Model, Table, HasMany } from 'sequelize-typescript';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Table
-export class User extends Model<User> {
-    @Column
-    firstName: string;
+@Entity()
+export class User {
+	@PrimaryGeneratedColumn()
+	id: number;
 
-    @Column
-    lastName: string;
+	@Column()
+	username: string;
 
-    @Column({ defaultValue: true })
-    isActive: boolean;
+	@Column()
+	password: string;
+
+	@Column({ default: true })
+	isActive: boolean;
 }
